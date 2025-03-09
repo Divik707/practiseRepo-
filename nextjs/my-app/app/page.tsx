@@ -1,23 +1,11 @@
-'use client'
+import axios from "axios"
 
-import axios from "axios";
-import { useEffect, useState } from "react"
-
-export default function Home() {
-
-  const [data, setData] = useState('');
-  const [loader, setLoader] = useState(true);
-
-  useEffect(() => {
-    axios.get('https://jsonplaceholder.typicode.com/posts/1').then(response => {
-      setData(response.data)
-      setLoader(false)
-    })
-  }, [])
-
+export default async function Home() {
+ const response =  await axios.get('https://jsonplaceholder.typicode.com/posts/1')
+  const data = response.data;
   return(
     <div>
-      {loader ? 'Loading...' : data.body}
+      {data ? data.body : 'laoding'}
     </div>
   )
 }
